@@ -1,0 +1,19 @@
+.center {
+    text-align: center;
+}
+
+.jumbotron {
+    padding: 2rem;
+}
+
+.section {
+    border: 2px solid black;
+    border-radius: 5px;
+    padding-top: 5px;
+    margin-bottom: 15px;
+    
+}
+
+body {
+    line-height: 1;
+}
