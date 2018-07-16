@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import Form from './components'
@@ -10,6 +10,20 @@ import Form from './components'
 
 export default class Export extends Component {
 
+  state = {
+    teacherName: '',
+    campusName: '',
+    schoolName: '',
+    roomNumber: ''
+}
+
+handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+        [name]: value
+    });
+};
+
   printDocument() {
     const input = document.getElementById('divToPrint');
     html2canvas(input)
@@ -20,14 +34,14 @@ export default class Export extends Component {
         // pdf.output('dataurlnewwindow');
         pdf.save("download.pdf");
       })
-    ;
+      ;
   }
 
   render() {
-    return (<div>
-      <div className="mb5">
-        <button onClick={this.printDocument}>Print</button>
-      </div>
+
+    return (
+    
+    <div>
       <div id="divToPrint" className="mt4 container" style={{
         backgroundColor: '#f5f5f5',
         width: '210mm',
@@ -35,11 +49,31 @@ export default class Export extends Component {
         marginLeft: 'auto',
         marginRight: 'auto'
       }}>
-          <h1 className='center'>Maintenance Form 2018-2019</h1>
-          <h3 className='center'>Please fill out all fields</h3>
-          <h4 className='center'>Check all items not addressed</h4>
+        <h1 className='center'>Maintenance Form 2018-2019</h1>
+        <h3 className='center'>Please fill out all fields</h3>
+        <h4 className='center'>Check all items not addressed</h4>
+
+        <div class="form-row">
+          <div class="form-group col-sm-12">
+            <input type="text" class="form-control" id='teacherName' placeholder="Name" onChange={this.handleInputChange} />
+          </div>
+          <div className='form-group col-sm-4'>
+            <input type="text" class="form-control" id='campusName' placeholder="Campus Name" onChange={this.handleInputChange} />
+          </div>
+          <div className='form-group col-sm-4'>
+            <input type="text" class="form-control" id='schoolName' placeholder="School Name" onChange={this.handleInputChange} />
+          </div>
+          <div class='form-group col-sm-4'>
+            <input type="text" class='form-control' id='roomNumber' placeholder="Room Number" onChange={this.handleInputChange} />
+          </div>
+        </div>
+
         <Form />
+
       </div>
+      <button onClick={this.printDocument} className='btn btn-primary center'>Submit</button>
+      
     </div>);
+
   }
 }

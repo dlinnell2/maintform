@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Info from './Info';
 import ClassDaily from './ClassDaily';
 import ClassWeekly from './ClassWeekly';
 import OfficeAreas from './OfficeAreas';
@@ -13,7 +12,6 @@ class Form extends Component {
     render () {
         return (
             <form>
-                <Info />
 
                 <h6>Classroom (Daily)</h6>
                 <ClassDaily daily={items[0]} />

@@ -1,5 +1,8 @@
 .center {
     text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
 }
 
 .jumbotron {
@@ -16,4 +19,9 @@
 
 body {
     line-height: 1;
+}
+
+.textArea {
+    min-width: 100%;
+    resize:none
 }
