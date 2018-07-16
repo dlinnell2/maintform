@@ -1,18 +1,21 @@
 {
-  "name": "maintform",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "html2canvas": "^1.0.0-alpha.12",
-    "jspdf": "^1.4.1",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "name": "example-create-react-app-express",
+    "version": "1.0.0",
+    "scripts": {
+        "client": "cd client && yarn start",
+        "server": "nodemon server.js",
+        "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+        "start": "node server.js",
+        "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    },
+    "dependencies": {
+        "base64-img": "^1.0.4",
+        "express": "^4.16.2",
+        "express-fileupload": "^0.4.0",
+        "jspdf": "^1.4.1",
+        "pdfmake": "^0.1.37"
+    },
+    "devDependencies": {
+        "concurrently": "^3.5.0"
+    }
 }
