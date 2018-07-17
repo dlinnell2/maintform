@@ -28,10 +28,10 @@ app.post('/api/submit', (req, res) => {
             });
 
             const mailOptions = {
-                sender: 'dlinnell2@gmail.com', // sender address
-                to: 'dlinnell@kipphouston.org', // list of receivers
-                subject: 'Test', // Subject line
-                body: 'Test',
+                sender: 'dlinnell2@gmail.com',
+                to: 'creinoza@kipphouston.org',
+                subject: 'KIPP Ops Form',
+                body: 'A KIPP Ops Form has been submitted to you',
                 attachments: [{ 'filename': 'form.jpg', 'content': data }]
             };
 
