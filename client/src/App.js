@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
 import Form from './components'
-import axios from 'axios'
-
-// download html2canvas and jsPDF and save the files in app/ext, or somewhere else
-// the built versions are directly consumable
-//import {html2canvas, jsPDF} from './ext';
 
 
 export default class Export extends Component {
@@ -26,21 +20,28 @@ export default class Export extends Component {
   };
 
   printDocument() {
+
     const input = document.getElementById('divToPrint');
+
     html2canvas(input)
       .then((canvas) => {
         const imgData = canvas.toDataURL('image/jpeg', 1);
-
-        var data = new FormData();
+        
+        const data = new FormData();
         data.append("image_data", imgData);
-        /* const pdf = new jsPDF();
-        pdf.addImage(imgData, 'JPEG', 0, 0);
-        // pdf.output('dataurlnewwindow');
-        pdf.save("download.pdf"); */
-        axios.post('/api/submit', data).then((res) => {
+
+        fetch('/api/submit', {
+
+          method: 'POST',
+          body: data,
+
+        }).then((res) => {
           console.log(res);
+
       });
-      });
+
+    });
+
   }
 
   render() {
