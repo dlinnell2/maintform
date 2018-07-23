@@ -20,17 +20,32 @@ class Form extends Component {
         message: 'Submit',
         redirect: false,
         submitted: false,
+        alert: ''
     }
 
     handleCampusChange = (event) => {
         this.setState({ campusName: event.target.value })
-    }
+    };
 
     handleInputChange = event => {
-        const { name, value } = event.target;
+        const { id, value } = event.target;
         this.setState({
-            [name]: value
+            [id]: value
         });
+    };
+
+    evaluate = () => {
+
+        if (!this.state.submitted && this.state.teacherName && this.state.campusName && this.state.schoolName && this.state.roomNumber) {
+
+            this.setState({ alert: '' })
+            this.printDocument();
+
+        } else {
+
+            this.displayAlert();
+
+        }
     };
 
     printDocument = () => {
@@ -64,6 +79,19 @@ class Form extends Component {
 
     }
 
+    displayAlert = () => {
+
+        if (!this.state.teacherName) {
+            this.setState({ alert: 'Please enter your name' })
+        } else if (!this.state.campusName) {
+            this.setState({ alert: 'Please select your campus' })
+        } else if (!this.state.schoolName) {
+            this.setState({ alert: 'Please enter the the name of your school' })
+        } else {
+            this.setState({ alert: 'Please enter your room number' })
+        }
+    }
+
     render() {
 
         if (this.state.redirect) {
@@ -86,7 +114,7 @@ class Form extends Component {
 
                         <div class="form-row">
                             <div class="form-group col-sm-12">
-                                <input type="text" class="form-control" id='teacherName' placeholder="Name" onChange={this.handleInputChange} />
+                                <input type="text" class="form-control" id='teacherName' placeholder="Name (required)" onChange={this.handleInputChange} />
                             </div>
                             <div className='form-group col-sm-4'>
                                 <select class="form-control" id="campusName" onChange={this.handleCampusChange}>
@@ -96,10 +124,10 @@ class Form extends Component {
                                 </select>
                             </div>
                             <div className='form-group col-sm-4'>
-                                <input type="text" class="form-control" id='schoolName' placeholder="School Name" onChange={this.handleInputChange} />
+                                <input type="text" class="form-control" id='schoolName' placeholder="School Name (required)" onChange={this.handleInputChange} />
                             </div>
                             <div class='form-group col-sm-4'>
-                                <input type="text" class='form-control' id='roomNumber' placeholder="Room Number" onChange={this.handleInputChange} />
+                                <input type="text" class='form-control' id='roomNumber' placeholder="Room Number (required)" onChange={this.handleInputChange} />
                             </div>
                         </div>
 
@@ -128,13 +156,16 @@ class Form extends Component {
 
                     </div>
 
-                    <button onClick={this.printDocument} className='btn btn-primary center'>{this.state.message}</button>
+                    <h5 className='text-danger center'>{this.state.alert}</h5>
+
+                    <button onClick={this.evaluate} className='btn btn-primary center'>{this.state.message}</button>
 
                 </div>
             )
 
         }
     }
+
 }
 
 export default Form;
