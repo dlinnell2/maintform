@@ -28,12 +28,12 @@ app.post('/api/submit', (req, res) => {
             break;
     }
 
-    base64.img(req.body.image_data, '', 'form', function (err, filepath) {
+    base64.img(req.body.image_data, '', `${req.body.campus}-form`, function (err, filepath) {
 
         const doc = new PDFDocument
 
-        doc.pipe(fs.createWriteStream('./form.pdf'))
-        doc.image('form.jpg', 32.5, 15, { height: 770 })
+        doc.pipe(fs.createWriteStream(`./${req.body.campus}-form.pdf`))
+        doc.image(`${req.body.campus}-form.jpg`, 32.5, 15, { height: 770 })
         doc.end()
 
         const transporter = nodemailer.createTransport({
@@ -50,18 +50,18 @@ app.post('/api/submit', (req, res) => {
             subject: 'KIPP Ops Form',
             text: 'A KIPP Ops Form has been submitted to you',
             attachments: [{
-                filename: 'form.pdf',
-                path: './form.pdf',
+                filename: `${req.body.campus}-form.pdf`,
+                path: `./${req.body.campus}-form.pdf`,
                 contentType: 'application/pdf'
             }]
         };
 
-        transporter.sendMail(mailOptions, function (err, info) {
+        /* transporter.sendMail(mailOptions, function (err, info) {
             if (err) throw err
 
-            fs.unlink('./form.jpg', (err) => {
+            fs.unlink(`${req.body.campus}-form.jpg`, (err) => {
 
-                fs.unlink('./form.pdf', (err) => {
+                fs.unlink(`./${req.body.campus}-form.pdf`, (err) => {
                     res.sendStatus(200);
 
                 });
@@ -69,7 +69,7 @@ app.post('/api/submit', (req, res) => {
 
             })
 
-        });
+        }); */
 
     });
 

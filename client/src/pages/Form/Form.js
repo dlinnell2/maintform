@@ -18,11 +18,12 @@ class Form extends Component {
         schoolName: '',
         roomNumber: '',
         message: 'Submit',
-        redirect: false
+        redirect: false,
+        submitted: false,
     }
 
     handleCampusChange = (event) => {
-        this.setState({campusName:event.target.value})
+        this.setState({ campusName: event.target.value })
     }
 
     handleInputChange = event => {
@@ -34,7 +35,10 @@ class Form extends Component {
 
     printDocument = () => {
 
-        this.setState({ message: 'Submitting, please wait' })
+        this.setState({
+            message: 'Submitting, please wait',
+            submitted: true,
+        })
 
         const input = document.getElementById('divToPrint');
 
@@ -123,7 +127,7 @@ class Form extends Component {
                         </form>
 
                     </div>
-                    
+
                     <button onClick={this.printDocument} className='btn btn-primary center'>{this.state.message}</button>
 
                 </div>
