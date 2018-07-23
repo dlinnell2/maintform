@@ -19,7 +19,7 @@ app.post('/api/submit', (req, res) => {
     res.sendStatus(200);
 
     let cbm = '';
-    const fileName = `${req.body.campus} ${moment().format('MM-DD-YY')}`
+    const fileName = `${req.body.campus} ${moment().format('MM-DD-YY-SSS')}`
 
     switch(req.body.campus) {
         case 'Connect':
