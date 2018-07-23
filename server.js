@@ -88,7 +88,7 @@ app.post('/api/submit', (req, res) => {
             }]
         };
 
-        /* transporter.sendMail(mailOptions, function (err, info) {
+        transporter.sendMail(mailOptions, function (err, info) {
             if (err) throw err
 
             fs.unlink(`${fileName}.jpg`, (err) => {
@@ -100,7 +100,7 @@ app.post('/api/submit', (req, res) => {
 
             })
 
-        }); */
+        });
 
     });
 

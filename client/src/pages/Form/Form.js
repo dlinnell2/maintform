@@ -87,8 +87,10 @@ class Form extends Component {
             this.setState({ alert: 'Please select your campus' })
         } else if (!this.state.schoolName) {
             this.setState({ alert: 'Please enter the the name of your school' })
-        } else {
+        } else if (!this.state.roomNumber){
             this.setState({ alert: 'Please enter your room number' })
+        } else {
+            return
         }
     }
 
