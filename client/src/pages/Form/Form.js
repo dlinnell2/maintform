@@ -64,6 +64,8 @@ class Form extends Component {
                 const data = new FormData();
                 data.append("image_data", imgData);
                 data.append("campus", this.state.campusName);
+                data.append('school', this.state.schoolName);
+                data.append('room', this.state.roomNumber);
 
                 fetch('/api/submit', {
 
